@@ -4,32 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>San Valentín</title>
+
   <style>
     * {
       box-sizing: border-box;
       font-family: Arial, Helvetica, sans-serif;
     }
 
-body {
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-  background-image: url("https://mbhseamlessdesigns.com/cdn/shop/files/5D43A86C-33DF-48AA-8598-1AF38C15323E.jpg?v=1700227420&width=1946");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+      background-image: url("https://mbhseamlessdesigns.com/cdn/shop/files/5D43A86C-33DF-48AA-8598-1AF38C15323E.jpg?v=1700227420&width=1946");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
 
-  overflow: hidden;
-}
-
+      overflow: hidden;
+    }
 
     .container {
       text-align: center;
       position: relative;
       z-index: 5;
+      background: rgba(255, 255, 255, 0.88);
+      padding: 30px 40px;
+      border-radius: 20px;
     }
 
     h1 {
@@ -39,7 +42,7 @@ body {
 
     img {
       width: 280px;
-      margin: 40px 0;
+      margin: 30px 0;
     }
 
     .buttons {
@@ -55,6 +58,7 @@ body {
       font-size: 16px;
       cursor: pointer;
       border-radius: 6px;
+      transition: all 0.2s ease;
     }
 
     #yesBtn {
@@ -97,13 +101,19 @@ body {
     }
   </style>
 </head>
+
 <body>
 
   <div class="overlay" id="overlay"></div>
 
   <div class="container" id="main">
     <h1>¿Quieres ser mi San Valentín?</h1>
-    <img src="https://m.media-amazon.com/images/I/51pT+FJJMRL._AC_UF894,1000_QL80_.jpg" alt="gatito" />
+
+    <img
+      src="https://m.media-amazon.com/images/I/51pT+FJJMRL._AC_UF894,1000_QL80_.jpg"
+      alt="gatito"
+    />
+
     <div class="buttons">
       <button id="yesBtn">Sí</button>
       <button id="noBtn">No</button>
@@ -130,9 +140,12 @@ body {
       const basePaddingX = 25;
       const baseFont = 16;
 
-      // Crecimiento REAL del botón (empuja layout)
-      yesBtn.style.padding = `${basePaddingY + growth * 6}px ${basePaddingX + growth * 12}px`;
-      yesBtn.style.fontSize = `${baseFont + growth * 2}px`;
+      // Crecimiento REAL (empuja todo)
+      yesBtn.style.padding =
+        `${basePaddingY + growth * 6}px ${basePaddingX + growth * 12}px`;
+
+      yesBtn.style.fontSize =
+        `${baseFont + growth * 2}px`;
     });
 
     yesBtn.addEventListener('click', () => {
@@ -148,5 +161,3 @@ body {
 
 </body>
 </html>
-
-

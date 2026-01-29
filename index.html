@@ -22,7 +22,8 @@
 
     .container {
       text-align: center;
-      z-index: 2;
+      position: relative;
+      z-index: 5;
     }
 
     h1 {
@@ -38,6 +39,7 @@
     .buttons {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 15px;
     }
 
@@ -47,7 +49,6 @@
       font-size: 16px;
       cursor: pointer;
       border-radius: 6px;
-      transition: all 0.3s ease;
     }
 
     #yesBtn {
@@ -55,26 +56,23 @@
       color: white;
       position: relative;
       z-index: 10;
-      transform: scale(1);
-      transition: transform 0.4s ease;
     }
 
     #noBtn {
       background-color: #e74c3c;
       color: white;
-      z-index: 3;
+      position: relative;
+      z-index: 6;
     }
 
     .overlay {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 100vmax;
-      height: 100vmax;
+      inset: 0;
       background-color: #2ecc71;
-      transform: translate(-50%, -50%) scale(0);
-      border-radius: 50%;
-      z-index: 9;
+      transform: scale(0);
+      transform-origin: center;
+      z-index: 4;
+      pointer-events: none;
       transition: transform 0.6s ease;
     }
 
@@ -89,19 +87,17 @@
       align-items: center;
       text-align: center;
       padding: 20px;
-      z-index: 5;
+      z-index: 20;
     }
   </style>
 </head>
 <body>
+
   <div class="overlay" id="overlay"></div>
 
   <div class="container" id="main">
     <h1>¿Quieres ser mi San Valentín?</h1>
-
-    <!-- Reemplaza la imagen por la que tú quieras -->
-    <img src="https://i.imgur.com/JYUb7sM.png" alt="gatito" />
-
+    <img src="https://i.pinimg.com/1200x/15/28/85/152885b795e25f83cbc8c04618362a11.jpg" alt="gatito" />
     <div class="buttons">
       <button id="yesBtn">Sí</button>
       <button id="noBtn">No</button>
@@ -119,26 +115,30 @@
     const message = document.getElementById('message');
     const main = document.getElementById('main');
 
-    let scale = 1;
+    let growth = 0;
 
     noBtn.addEventListener('click', () => {
-      scale += 1.5;
+      growth++;
 
-      // Agrandar botón Sí
-      yesBtn.style.transform = `scale(${scale})`;
+      const basePaddingY = 12;
+      const basePaddingX = 25;
+      const baseFont = 16;
 
-      // Hacer que el verde cubra toda la pantalla
-      overlay.style.transform = `translate(-50%, -50%) scale(${scale})`;
+      // Crecimiento REAL del botón (empuja layout)
+      yesBtn.style.padding = `${basePaddingY + growth * 6}px ${basePaddingX + growth * 12}px`;
+      yesBtn.style.fontSize = `${baseFont + growth * 2}px`;
     });
 
     yesBtn.addEventListener('click', () => {
       main.style.display = 'none';
-      overlay.style.transform = 'translate(-50%, -50%) scale(10)';
+      overlay.style.zIndex = '15';
+      overlay.style.transform = 'scale(3)';
+
       setTimeout(() => {
         message.style.display = 'flex';
       }, 400);
     });
-    });
   </script>
+
 </body>
 </html>

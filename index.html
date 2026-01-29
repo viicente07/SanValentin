@@ -54,7 +54,9 @@
       background-color: #2ecc71;
       color: white;
       position: relative;
-      z-index: 3;
+      z-index: 10;
+      transform: scale(1);
+      transition: transform 0.4s ease;
     }
 
     #noBtn {
@@ -65,14 +67,14 @@
 
     .overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 50%;
+      left: 50%;
+      width: 100vmax;
+      height: 100vmax;
       background-color: #2ecc71;
-      transform: scale(0);
+      transform: translate(-50%, -50%) scale(0);
       border-radius: 50%;
-      z-index: 1;
+      z-index: 9;
       transition: transform 0.6s ease;
     }
 
@@ -117,23 +119,25 @@
     const message = document.getElementById('message');
     const main = document.getElementById('main');
 
-    let scale = 0;
+    let scale = 1;
 
     noBtn.addEventListener('click', () => {
-      scale += 0.4;
-      overlay.style.transform = `scale(${scale})`;
+      scale += 1.5;
 
-      if (scale >= 3) {
-        overlay.style.transform = 'scale(5)';
-      }
+      // Agrandar botón Sí
+      yesBtn.style.transform = `scale(${scale})`;
+
+      // Hacer que el verde cubra toda la pantalla
+      overlay.style.transform = `translate(-50%, -50%) scale(${scale})`;
     });
 
     yesBtn.addEventListener('click', () => {
       main.style.display = 'none';
-      overlay.style.transform = 'scale(5)';
+      overlay.style.transform = 'translate(-50%, -50%) scale(10)';
       setTimeout(() => {
         message.style.display = 'flex';
       }, 400);
+    });
     });
   </script>
 </body>
